@@ -18,7 +18,10 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
     
     const distribution = new cloudfront.Distribution(this, 'distribution', {
       defaultBehavior: { 
-        origin: new origins.HttpOrigin(http_origin_host)
+        origin: new origins.HttpOrigin(http_origin_host, {
+          httpPort: 8080,
+          protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
+        }),
       },
       domainNames: [cdk.Fn.join(".", [subdomain, domain])],
       certificate: certificate,
