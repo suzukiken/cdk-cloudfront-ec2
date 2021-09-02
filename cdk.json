@@ -13,6 +13,10 @@
     "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
     "@aws-cdk/aws-efs:defaultEncryptionAtRest": true,
     "@aws-cdk/aws-lambda:recognizeVersionProps": true,
-    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "domain": "figmentresearch.com",
+    "subdomain": "c91",
+    "useast1_acmarn_exportname": "v-domain-figmentresearch-wildcard-useast1-acmarn-3",
+    "http_origin_host": "ec2-18-183-21-217.ap-northeast-1.compute.amazonaws.com"
   }
 }
