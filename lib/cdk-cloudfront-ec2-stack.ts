@@ -13,15 +13,17 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
     const subdomain = this.node.tryGetContext('subdomain')
     const acmarn = cdk.Fn.importValue(this.node.tryGetContext('useast1_acmarn_exportname'))
     const http_origin_host = this.node.tryGetContext('http_origin_host')
+    const port = this.node.tryGetContext('port')
 
     const certificate = acm.Certificate.fromCertificateArn(this, 'certificate', acmarn)
     
     const distribution = new cloudfront.Distribution(this, 'distribution', {
       defaultBehavior: { 
         origin: new origins.HttpOrigin(http_origin_host, {
-          httpPort: 8080,
+          httpPort: port,
           protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
         }),
+        cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
       },
       domainNames: [cdk.Fn.join(".", [subdomain, domain])],
       certificate: certificate,
