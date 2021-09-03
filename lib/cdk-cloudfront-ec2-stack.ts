@@ -27,6 +27,18 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
       },
       domainNames: [cdk.Fn.join(".", [subdomain, domain])],
       certificate: certificate,
+      errorResponses: [
+        {
+          httpStatus: 403,
+          responseHttpStatus: 200,
+          responsePagePath: '/index.html'
+        },
+        {
+          httpStatus: 404,
+          responseHttpStatus: 200,
+          responsePagePath: '/index.html'
+        },
+      ]
     })
     
     const zone = route53.HostedZone.fromLookup(this, "zone", {
@@ -43,3 +55,4 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
 
   }
 }
+
