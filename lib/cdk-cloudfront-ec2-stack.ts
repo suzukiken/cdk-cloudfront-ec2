@@ -1,17 +1,18 @@
-import * as cdk from '@aws-cdk/core';
-import * as acm from "@aws-cdk/aws-certificatemanager";
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as targets from "@aws-cdk/aws-route53-targets/lib";
+import { Stack, StackProps, Fn } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as acm from 'aws-cdk-lib/aws-certificatemanager';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as targets from 'aws-cdk-lib/aws-route53-targets';
 
-export class CdkCloudfrontEc2Stack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class CdkCloudfrontEc2Stack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     const domain = this.node.tryGetContext('domain')
     const subdomain = this.node.tryGetContext('subdomain')
-    const acmarn = cdk.Fn.importValue(this.node.tryGetContext('useast1_acmarn_exportname'))
+    const acmarn = Fn.importValue(this.node.tryGetContext('useast1_acmarn_exportname'))
     const http_origin_host = this.node.tryGetContext('http_origin_host')
     const port = this.node.tryGetContext('port')
 
@@ -25,7 +26,7 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
         }),
         cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
       },
-      domainNames: [cdk.Fn.join(".", [subdomain, domain])],
+      domainNames: [Fn.join(".", [subdomain, domain])],
       certificate: certificate,
       errorResponses: [
         {
@@ -55,4 +56,5 @@ export class CdkCloudfrontEc2Stack extends cdk.Stack {
 
   }
 }
+
 
