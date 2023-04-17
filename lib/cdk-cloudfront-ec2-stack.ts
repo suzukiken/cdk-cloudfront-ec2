@@ -1,4 +1,4 @@
-import { Stack, StackProps, Fn } from 'aws-cdk-lib';
+import { Stack, StackProps, Fn, CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
@@ -52,6 +52,22 @@ export class CdkCloudfrontEc2Stack extends Stack {
         new targets.CloudFrontTarget(distribution)
       ),
       zone: zone,
+    })
+    
+    new CfnOutput(this, 'DomainName', { 
+      value: record.domainName,
+      description: "route53 record domain name"
+    })
+    
+    new CfnOutput(this, 'ZoneName', { 
+      value: zone.zoneName,
+      description: "route53 zone name"
+    })
+    
+    new CfnOutput(this, 'Distribution', { 
+      value: distribution.distributionId,
+      description: "CloudFront distribution id",
+      exportName: "cloud9-web-distribution-id"
     })
 
   }

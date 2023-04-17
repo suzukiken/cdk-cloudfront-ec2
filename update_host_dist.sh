@@ -1,0 +1,1 @@
+source env/bin/activate & python3 utility/update_distribution.py

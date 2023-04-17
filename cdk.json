@@ -36,7 +36,7 @@
     "domain": "figmentresearch.com",
     "subdomain": "c98",
     "useast1_acmarn_exportname": "v-domain-figmentresearch-wildcard-useast1-acmarn-3",
-    "http_origin_host": "ec2-52-197-209-85.ap-northeast-1.compute.amazonaws.com",
+    "http_origin_host": "ec2-3-112-17-58.ap-northeast-1.compute.amazonaws.com",
     "port": 8080
   }
 }
